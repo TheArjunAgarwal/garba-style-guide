@@ -410,20 +410,31 @@
     }
 
     dialog.lb {
-      width: min(680px, 94vw);
-      max-height: 90vh;
-      padding: 0;
-      border: 3px solid var(--gold);
-      border-radius: 16px;
-      background: #1a0a24;
-      color: #fff1dc;
-      overflow: hidden
-    }
+  width: fit-content;
+  max-width: 94vw;
+  max-height: 90vh;
+  padding: 0;
+  border: 3px solid var(--gold);
+  border-radius: 16px;
+  background: #1a0a24;
+  color: #fff1dc;
+  overflow: hidden;
+}
 
-    dialog.lb[open] {
-      display: flex;
-      flex-direction: column
-    }
+dialog.lb[open] {
+  display: flex;
+  flex-direction: column;
+}
+
+.lb-body {
+  min-width: 0;
+  overflow-y: auto;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
 
     dialog.lb::backdrop {
       background: rgba(20, 5, 35, .8)
@@ -445,19 +456,20 @@
       color: var(--gold)
     }
 
-    .lb-body {
-      overflow-y: auto;
-      padding: 14px;
-      display: grid;
-      gap: 14px
-    }
+.lb-body img,
+.lb-body video {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 70vh;
+  object-fit: contain;
+  border-radius: 10px;
+}
 
-    .lb-body img {
-      width: 100%;
-      height: auto;
-      display: block;
-      border-radius: 10px
-    }
+.lb-body video {
+  background: #000;
+}
 
     .inspo h3 {
       font-size: 1.6rem;
@@ -917,30 +929,137 @@
     /* IMAGES: put numbered files in these folders (1.jpg, 2.jpg, 3.jpg … jpg/jpeg/png/webp, up to 24 each):
        images/girls/saree  kurti  shrug  skirt      images/boys/step1  step2  step3
        images/inspo/girls   images/inspo/boys */
-    const MAX = 24, EXT = ['jpg', 'jpeg', 'png', 'webp'], cache = {};
-    function load(base, cb, fail) {
-      let i = 0; (function next() {
-        if (i >= EXT.length) { fail && fail(); return }
-        const im = new Image(); im.onload = () => cb(im); im.onerror = next; im.src = `images/${base}.${EXT[i++]}`
-      })()
+
+       /* INSPO FILES:
+   Images: jpg, jpeg, png, webp
+   Videos: mp4
+
+   Example:
+   images/girls/saree/1.jpg
+   images/girls/saree/2.mp4
+   images/boys/step1/1.mp4
+   images/inspo/girls/1.jpg
+*/
+const MAX = 24;
+const EXT = ['jpg', 'jpeg', 'png', 'webp', 'mp4'];
+const cache = {};
+
+function load(base, cb, fail) {
+  let i = 0;
+
+  (function next() {
+    if (i >= EXT.length) {
+      fail && fail();
+      return;
     }
-    function fetchSet(set) {
-      return cache[set] || (cache[set] = new Promise(res => {
-        const slots = []; let done = 0; const fin = () => { if (++done === MAX) res(slots.filter(Boolean)) };
-        for (let n = 1; n <= MAX; n++)load(`${set}/${n}`, im => { slots[n] = im; fin() }, fin)
-      }))
+
+    const ext = EXT[i++];
+    const src = `images/${base}.${ext}`;
+
+    if (ext === 'mp4') {
+      const video = document.createElement('video');
+      video.preload = 'metadata';
+
+      video.onloadedmetadata = () => cb({
+        type: 'video',
+        src
+      });
+
+      video.onerror = next;
+      video.src = src;
+      return;
     }
-    const lb = document.getElementById('lb'), lbB = document.getElementById('lbB');
-    document.querySelectorAll('.peek').forEach(b => b.onclick = async () => {
-      const c = b.closest('.card');
-      document.getElementById('lbT').textContent = c ? c.querySelector('h3').textContent : 'More inspo';
-      lbB.innerHTML = '<p>Loading…</p>'; lb.showModal(); lbB.scrollTop = 0;
-      const ims = await fetchSet(b.dataset.set); lbB.innerHTML = '';
-      if (!ims.length) { lbB.innerHTML = '<p>Inspo pics coming soon.</p>'; return }
-      ims.forEach(im => { const x = im.cloneNode(); x.alt = 'Outfit inspiration'; lbB.appendChild(x) })
+
+    const im = new Image();
+    im.onload = () => cb({
+      type: 'image',
+      src
     });
-    document.getElementById('lbX').onclick = () => lb.close();
-    lb.onclick = e => { if (e.target === lb) lb.close() };
+    im.onerror = next;
+    im.src = src;
+  })();
+}
+
+function fetchSet(set) {
+  return cache[set] || (cache[set] = new Promise(res => {
+    const slots = [];
+    let done = 0;
+
+    const fin = () => {
+      if (++done === MAX) {
+        res(slots.filter(Boolean));
+      }
+    };
+
+    for (let n = 1; n <= MAX; n++) {
+      load(`${set}/${n}`, item => {
+        slots[n] = item;
+        fin();
+      }, fin);
+    }
+  }));
+}
+
+const lb = document.getElementById('lb');
+const lbB = document.getElementById('lbB');
+
+document.querySelectorAll('.peek').forEach(b => {
+  b.onclick = async () => {
+    const c = b.closest('.card');
+
+    document.getElementById('lbT').textContent =
+      c ? c.querySelector('h3').textContent : 'More inspo';
+
+    lbB.innerHTML = '<p>Loading…</p>';
+    lb.showModal();
+    lbB.scrollTop = 0;
+
+    const media = await fetchSet(b.dataset.set);
+
+    lbB.innerHTML = '';
+
+    if (!media.length) {
+      lbB.innerHTML = '<p>Inspo pics and videos coming soon.</p>';
+      return;
+    }
+
+    media.forEach(item => {
+      if (item.type === 'video') {
+        const video = document.createElement('video');
+
+        video.src = item.src;
+        video.controls = true;
+        video.playsInline = true;
+        video.preload = 'metadata';
+        video.setAttribute('aria-label', 'Outfit inspiration video');
+
+        lbB.appendChild(video);
+      } else {
+        const img = document.createElement('img');
+
+        img.src = item.src;
+        img.alt = 'Outfit inspiration';
+
+        lbB.appendChild(img);
+      }
+    });
+  };
+});
+
+document.getElementById('lbX').onclick = () => lb.close();
+
+lb.onclick = e => {
+  if (e.target === lb) lb.close();
+};
+
+// Pause videos when the lightbox closes.
+lb.addEventListener('close', () => {
+  lbB.querySelectorAll('video').forEach(video => {
+    video.pause();
+    video.removeAttribute('src');
+    video.load();
+  });
+});
 
     // string lights
     (function () {
