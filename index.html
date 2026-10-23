@@ -1,281 +1,996 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>CMI Garba · Style Guide & FAQ</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<style>
-@font-face{font-family:"Biocats";src:url("fonts/Biocats.ttf") format("truetype");font-display:swap}
-@font-face{font-family:"BackOut";src:url("fonts/BackOut.ttf") format("truetype");font-display:swap}
-:root{
-  --bg:#6b1fb5;--bg2:#561596;--card:#f6ecd9;--ink:#1a0a24;--muted:#5b4a66;
-  --gold:#ffc928;--orange:#ee5f1b;--red:#d9222a;--green:#5c9a2e;
-  --on-bg:#fff6e6;--head:"Biocats","Arial Black",Impact,sans-serif;--sub:"BackOut",system-ui,sans-serif;--body:"DM Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
-  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
-}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#3f0f73;--bg2:#2e0a58;--card:#2a1440;--ink:#fff1dc;--muted:#c9b6d9}}
-:root[data-theme="dark"]{--bg:#3f0f73;--bg2:#2e0a58;--card:#2a1440;--ink:#fff1dc;--muted:#c9b6d9}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:70px}
-body{margin:0;font-family:var(--body);font-size:1.05rem;background:linear-gradient(var(--bg),var(--bg2));background-color:var(--bg);color:var(--on-bg);line-height:1.5}
-h1,h2,h3,.num,summary::after,.btn,.tag,.chip b{font-family:var(--head)}
-h1,h2,h3{font-weight:400;line-height:1.05;margin:0;letter-spacing:.02em}
-summary,.chip,nav a,.tabs button,.warn,.who span,.btn,.tag,.duo b,.addr b,.sub-h{font-family:var(--sub)}
-.rs{font-family:system-ui,sans-serif;letter-spacing:0}
-nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;display:flex;gap:6px;justify-content:center;flex-wrap:wrap;padding:10px;background:var(--bg2);border-bottom:2px solid var(--gold)}
-nav a{color:var(--on-bg);text-decoration:none;font-size:1.05rem;padding:4px 16px;border-radius:99px}
-nav a:hover,nav a:focus-visible{background:var(--gold);color:#1a0a24;outline:none}
-.hero{position:relative;overflow:hidden;min-height:64vh;display:grid;place-items:center;text-align:center;padding:60px 20px 70px}
-.lights{position:absolute;inset:0;pointer-events:none}
-.lights i{position:absolute;width:9px;height:9px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px 3px rgba(255,201,40,.65);animation:tw 2.6s ease-in-out infinite}
-@keyframes tw{50%{opacity:.35;transform:scale(.7)}}
-.hero-in{position:relative;max-width:760px}
-.hero h1{font-size:clamp(3.4rem,14vw,8rem);color:var(--gold);text-shadow:4px 4px 0 var(--ink);margin:0 0 24px;transform:rotate(-2deg)}
-.hero h1 span{color:var(--orange)}
-.chips{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-.chip{background:var(--card);color:var(--ink);border:2px solid var(--ink);border-radius:14px;padding:10px 18px;box-shadow:4px 4px 0 var(--ink);font-size:1.2rem}
-.chip small{display:block;color:var(--muted);font-size:.8rem;text-transform:uppercase;letter-spacing:.1em}
-section{max-width:980px;margin:0 auto;padding:70px 20px 10px}
-h2{font-size:clamp(2.2rem,7vw,3.4rem);color:var(--gold);text-shadow:3px 3px 0 var(--ink);margin-bottom:16px}
-.tabs{display:inline-flex;background:var(--bg2);border:2px solid var(--gold);border-radius:99px;padding:4px;margin-bottom:22px}
-.tabs button{font:inherit;font-size:1.15rem;border:0;background:none;color:var(--on-bg);padding:6px 26px;border-radius:99px;cursor:pointer}
-.tabs button[aria-selected="true"]{background:var(--gold);color:#1a0a24}
-.tabs button:focus-visible,.btn:focus-visible{outline:3px solid #fff;outline-offset:2px}
-.panel[hidden]{display:none}
-.card{background:var(--card);color:var(--ink);border:2px solid var(--ink);border-radius:18px;padding:18px 20px;box-shadow:5px 5px 0 var(--ink)}
-.sub-h{font-size:1.6rem;margin-bottom:16px}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
-@media (max-width:520px){.grid{grid-template-columns:1fr}}
-.outfit{display:flex;flex-direction:column;gap:12px;padding:12px 12px 18px}
-.outfit .txt{padding:0 8px}
-.card h3{font-size:1.35rem;margin-bottom:6px;color:var(--orange)}
-.card p{margin:0}
-.tag{display:inline-block;font-size:.85rem;background:var(--gold);color:#1a0a24;border-radius:99px;padding:2px 12px;margin-bottom:8px;letter-spacing:.05em}
-.rant{background:#1a0a24;color:#fff1dc;border:2px dashed var(--gold);border-radius:18px;padding:18px 22px;margin-bottom:22px}
-.steps{display:grid;gap:20px}
-.step{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:start}
-.step.noimg{grid-template-columns:auto 1fr}
-.num{font-size:2.8rem;color:var(--orange);line-height:1}
-.step h3{color:var(--ink);font-size:1.4rem;margin-bottom:6px}
-.step p{margin:0 0 10px}
-.step p:last-child{margin:0}
-.duo{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:12px 0}
-.duo div{border:2px solid var(--ink);border-radius:12px;padding:10px 14px;background:rgba(238,95,27,.12)}
-.duo b{color:var(--orange);font-family:var(--head);font-weight:400;font-size:1.15rem}
-.warn{background:var(--red);color:#fff;border-radius:12px;padding:10px 16px;margin-top:6px;text-align:center}
-.inspo{margin-top:34px}
-.peek{margin-top:14px;font-size:1rem}
-dialog.lb{width:min(680px,94vw);max-height:90vh;padding:0;border:3px solid var(--gold);border-radius:16px;background:#1a0a24;color:#fff1dc;overflow:hidden}
-dialog.lb[open]{display:flex;flex-direction:column}
-dialog.lb::backdrop{background:rgba(20,5,35,.8)}
-.lb-top{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 14px;border-bottom:2px solid var(--gold)}
-.lb-top b{font-family:var(--head);font-weight:400;font-size:1.3rem;color:var(--gold)}
-.lb-body{overflow-y:auto;padding:14px;display:grid;gap:14px}
-.lb-body img{width:100%;height:auto;display:block;border-radius:10px}
-.inspo h3{font-size:1.6rem;color:var(--gold);margin-bottom:14px}
-.btn{font-size:1.05rem;background:var(--gold);color:#1a0a24;border:2px solid var(--ink);border-radius:99px;padding:8px 20px;cursor:pointer;box-shadow:3px 3px 0 var(--ink);letter-spacing:.04em}
-.btn:hover{transform:translate(-1px,-1px)}
-.btn:disabled{opacity:.6;cursor:default}
-.faq-tools{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
-.faq-tools input{flex:1;min-width:200px;font:inherit;padding:10px 18px;border-radius:99px;border:2px solid var(--ink);background:var(--card);color:var(--ink)}
-details{background:var(--card);color:var(--ink);border:2px solid var(--ink);border-radius:16px;margin-bottom:12px;box-shadow:4px 4px 0 var(--ink)}
-summary{cursor:pointer;list-style:none;padding:14px 18px;display:flex;justify-content:space-between;gap:12px;font-size:1.2rem}
-summary::-webkit-details-marker{display:none}
-summary::after{content:"+";color:var(--orange);font-size:1.5rem;line-height:1}
-details[open] summary::after{content:"−"}
-summary:focus-visible{outline:3px solid var(--orange);border-radius:14px}
-details .a{padding:0 18px 16px}
-details .a p{margin:0 0 8px}
-details.troll{border-color:var(--red)}
-.letter{margin-top:10px;padding:14px;border:2px dashed var(--red);border-radius:12px}
-.addr{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:6px 0 14px}
-.addr address{font-style:normal;border-left:5px solid var(--red);padding:4px 12px;background:rgba(217,34,42,.08);border-radius:0 10px 10px 0}
-.addr b{font-family:var(--head);font-weight:400;color:var(--red);font-size:1.1rem}
-.status{margin-top:10px;color:var(--green)}
-.none{display:none;text-align:center;padding:20px}
-footer{margin-top:80px;text-align:center;padding:40px 20px 50px;background:var(--bg2);border-top:2px solid var(--gold)}
-footer h2{font-size:2.4rem}
-.who{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:14px 0 20px}
-.who span{background:var(--gold);color:#1a0a24;border-radius:99px;padding:4px 20px;border:2px solid var(--ink)}
-#theme{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:30;width:42px;height:42px;border-radius:50%;border:2px solid var(--ink);background:var(--gold);cursor:pointer;font-size:1.1rem}
-@media (prefers-reduced-motion:reduce){.lights i{animation:none}html{scroll-behavior:auto}}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>CMI Garba · Style Guide & FAQ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    @font-face {
+      font-family: "Biocats";
+      src: url("fonts/Biocats.ttf") format("truetype");
+      font-display: swap
+    }
+
+    @font-face {
+      font-family: "BackOut";
+      src: url("fonts/BackOut.ttf") format("truetype");
+      font-display: swap
+    }
+
+    :root {
+      --bg: #6b1fb5;
+      --bg2: #561596;
+      --card: #f6ecd9;
+      --ink: #1a0a24;
+      --muted: #5b4a66;
+      --gold: #ffc928;
+      --orange: #ee5f1b;
+      --red: #d9222a;
+      --green: #5c9a2e;
+      --on-bg: #fff6e6;
+      --head: "Biocats", "Arial Black", Impact, sans-serif;
+      --sub: "BackOut", system-ui, sans-serif;
+      --body: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+      box-sizing: border-box;
+      padding-top: env(safe-area-inset-top, 0px);
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    @media (prefers-color-scheme:dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #3f0f73;
+        --bg2: #2e0a58;
+        --card: #2a1440;
+        --ink: #fff1dc;
+        --muted: #c9b6d9
+      }
+    }
+
+    :root[data-theme="dark"] {
+      --bg: #3f0f73;
+      --bg2: #2e0a58;
+      --card: #2a1440;
+      --ink: #fff1dc;
+      --muted: #c9b6d9
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 70px
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--body);
+      font-size: 1.05rem;
+      background: linear-gradient(var(--bg), var(--bg2));
+      background-color: var(--bg);
+      color: var(--on-bg);
+      line-height: 1.5
+    }
+
+    h1,
+    h2,
+    h3,
+    .num,
+    summary::after,
+    .btn,
+    .tag,
+    .chip b {
+      font-family: var(--head)
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-weight: 400;
+      line-height: 1.05;
+      margin: 0;
+      letter-spacing: .02em
+    }
+
+    summary,
+    .chip,
+    nav a,
+    .tabs button,
+    .warn,
+    .who span,
+    .btn,
+    .tag,
+    .duo b,
+    .addr b,
+    .sub-h {
+      font-family: var(--sub)
+    }
+
+    .rs {
+      font-family: system-ui, sans-serif;
+      letter-spacing: 0
+    }
+
+    nav {
+      position: sticky;
+      top: env(safe-area-inset-top, 0px);
+      z-index: 20;
+      display: flex;
+      gap: 6px;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 10px;
+      background: var(--bg2);
+      border-bottom: 2px solid var(--gold)
+    }
+
+    nav a {
+      color: var(--on-bg);
+      text-decoration: none;
+      font-size: 1.05rem;
+      padding: 4px 16px;
+      border-radius: 99px
+    }
+
+    nav a:hover,
+    nav a:focus-visible {
+      background: var(--gold);
+      color: #1a0a24;
+      outline: none
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      min-height: 64vh;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 60px 20px 70px
+    }
+
+    .lights {
+      position: absolute;
+      inset: 0;
+      pointer-events: none
+    }
+
+    .lights i {
+      position: absolute;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 10px 3px rgba(255, 201, 40, .65);
+      animation: tw 2.6s ease-in-out infinite
+    }
+
+    @keyframes tw {
+      50% {
+        opacity: .35;
+        transform: scale(.7)
+      }
+    }
+
+    .hero-in {
+      position: relative;
+      max-width: 760px
+    }
+
+    .hero h1 {
+      font-size: clamp(3.4rem, 14vw, 8rem);
+      color: var(--gold);
+      text-shadow: 4px 4px 0 var(--ink);
+      margin: 0 0 24px;
+      transform: rotate(-2deg)
+    }
+
+    .hero h1 span {
+      color: var(--orange)
+    }
+
+    .chips {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap
+    }
+
+    .chip {
+      background: var(--card);
+      color: var(--ink);
+      border: 2px solid var(--ink);
+      border-radius: 14px;
+      padding: 10px 18px;
+      box-shadow: 4px 4px 0 var(--ink);
+      font-size: 1.2rem
+    }
+
+    .chip small {
+      display: block;
+      color: var(--muted);
+      font-size: .8rem;
+      text-transform: uppercase;
+      letter-spacing: .1em
+    }
+
+    section {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 70px 20px 10px
+    }
+
+    h2 {
+      font-size: clamp(2.2rem, 7vw, 3.4rem);
+      color: var(--gold);
+      text-shadow: 3px 3px 0 var(--ink);
+      margin-bottom: 16px
+    }
+
+    .tabs {
+      display: inline-flex;
+      background: var(--bg2);
+      border: 2px solid var(--gold);
+      border-radius: 99px;
+      padding: 4px;
+      margin-bottom: 22px
+    }
+
+    .tabs button {
+      font: inherit;
+      font-size: 1.15rem;
+      border: 0;
+      background: none;
+      color: var(--on-bg);
+      padding: 6px 26px;
+      border-radius: 99px;
+      cursor: pointer
+    }
+
+    .tabs button[aria-selected="true"] {
+      background: var(--gold);
+      color: #1a0a24
+    }
+
+    .tabs button:focus-visible,
+    .btn:focus-visible {
+      outline: 3px solid #fff;
+      outline-offset: 2px
+    }
+
+    .panel[hidden] {
+      display: none
+    }
+
+    .card {
+      background: var(--card);
+      color: var(--ink);
+      border: 2px solid var(--ink);
+      border-radius: 18px;
+      padding: 18px 20px;
+      box-shadow: 5px 5px 0 var(--ink)
+    }
+
+    .sub-h {
+      font-size: 1.6rem;
+      margin-bottom: 16px
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px
+    }
+
+    @media (max-width:520px) {
+      .grid {
+        grid-template-columns: 1fr
+      }
+    }
+
+    .outfit {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 12px 12px 18px
+    }
+
+    .outfit .txt {
+      padding: 0 8px
+    }
+
+    .card h3 {
+      font-size: 1.35rem;
+      margin-bottom: 6px;
+      color: var(--orange)
+    }
+
+    .card p {
+      margin: 0
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: .85rem;
+      background: var(--gold);
+      color: #1a0a24;
+      border-radius: 99px;
+      padding: 2px 12px;
+      margin-bottom: 8px;
+      letter-spacing: .05em
+    }
+
+    .rant {
+      background: #1a0a24;
+      color: #fff1dc;
+      border: 2px dashed var(--gold);
+      border-radius: 18px;
+      padding: 18px 22px;
+      margin-bottom: 22px
+    }
+
+    .steps {
+      display: grid;
+      gap: 20px
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 18px;
+      align-items: start
+    }
+
+    .step.noimg {
+      grid-template-columns: auto 1fr
+    }
+
+    .num {
+      font-size: 2.8rem;
+      color: var(--orange);
+      line-height: 1
+    }
+
+    .step h3 {
+      color: var(--ink);
+      font-size: 1.4rem;
+      margin-bottom: 6px
+    }
+
+    .step p {
+      margin: 0 0 10px
+    }
+
+    .step p:last-child {
+      margin: 0
+    }
+
+    .duo {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin: 12px 0
+    }
+
+    .duo div {
+      border: 2px solid var(--ink);
+      border-radius: 12px;
+      padding: 10px 14px;
+      background: rgba(238, 95, 27, .12)
+    }
+
+    .duo b {
+      color: var(--orange);
+      font-family: var(--head);
+      font-weight: 400;
+      font-size: 1.15rem
+    }
+
+    .warn {
+      background: var(--red);
+      color: #fff;
+      border-radius: 12px;
+      padding: 10px 16px;
+      margin-top: 6px;
+      text-align: center
+    }
+
+    .inspo {
+      margin-top: 34px
+    }
+
+    .peek {
+      margin-top: 14px;
+      font-size: 1rem
+    }
+
+    dialog.lb {
+      width: min(680px, 94vw);
+      max-height: 90vh;
+      padding: 0;
+      border: 3px solid var(--gold);
+      border-radius: 16px;
+      background: #1a0a24;
+      color: #fff1dc;
+      overflow: hidden
+    }
+
+    dialog.lb[open] {
+      display: flex;
+      flex-direction: column
+    }
+
+    dialog.lb::backdrop {
+      background: rgba(20, 5, 35, .8)
+    }
+
+    .lb-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-bottom: 2px solid var(--gold)
+    }
+
+    .lb-top b {
+      font-family: var(--head);
+      font-weight: 400;
+      font-size: 1.3rem;
+      color: var(--gold)
+    }
+
+    .lb-body {
+      overflow-y: auto;
+      padding: 14px;
+      display: grid;
+      gap: 14px
+    }
+
+    .lb-body img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 10px
+    }
+
+    .inspo h3 {
+      font-size: 1.6rem;
+      color: var(--gold);
+      margin-bottom: 14px
+    }
+
+    .btn {
+      font-size: 1.05rem;
+      background: var(--gold);
+      color: #1a0a24;
+      border: 2px solid var(--ink);
+      border-radius: 99px;
+      padding: 8px 20px;
+      cursor: pointer;
+      box-shadow: 3px 3px 0 var(--ink);
+      letter-spacing: .04em
+    }
+
+    .btn:hover {
+      transform: translate(-1px, -1px)
+    }
+
+    .btn:disabled {
+      opacity: .6;
+      cursor: default
+    }
+
+    .faq-tools {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 18px
+    }
+
+    .faq-tools input {
+      flex: 1;
+      min-width: 200px;
+      font: inherit;
+      padding: 10px 18px;
+      border-radius: 99px;
+      border: 2px solid var(--ink);
+      background: var(--card);
+      color: var(--ink)
+    }
+
+    details {
+      background: var(--card);
+      color: var(--ink);
+      border: 2px solid var(--ink);
+      border-radius: 16px;
+      margin-bottom: 12px;
+      box-shadow: 4px 4px 0 var(--ink)
+    }
+
+    summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 14px 18px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 1.2rem
+    }
+
+    summary::-webkit-details-marker {
+      display: none
+    }
+
+    summary::after {
+      content: "+";
+      color: var(--orange);
+      font-size: 1.5rem;
+      line-height: 1
+    }
+
+    details[open] summary::after {
+      content: "−"
+    }
+
+    summary:focus-visible {
+      outline: 3px solid var(--orange);
+      border-radius: 14px
+    }
+
+    details .a {
+      padding: 0 18px 16px
+    }
+
+    details .a p {
+      margin: 0 0 8px
+    }
+
+    details.troll {
+      border-color: var(--red)
+    }
+
+    .letter {
+      margin-top: 10px;
+      padding: 14px;
+      border: 2px dashed var(--red);
+      border-radius: 12px
+    }
+
+    .addr {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 12px;
+      margin: 6px 0 14px
+    }
+
+    .addr address {
+      font-style: normal;
+      border-left: 5px solid var(--red);
+      padding: 4px 12px;
+      background: rgba(217, 34, 42, .08);
+      border-radius: 0 10px 10px 0
+    }
+
+    .addr b {
+      font-family: var(--head);
+      font-weight: 400;
+      color: var(--red);
+      font-size: 1.1rem
+    }
+
+    .status {
+      margin-top: 10px;
+      color: var(--green)
+    }
+
+    .none {
+      display: none;
+      text-align: center;
+      padding: 20px
+    }
+
+    footer {
+      margin-top: 80px;
+      text-align: center;
+      padding: 40px 20px 50px;
+      background: var(--bg2);
+      border-top: 2px solid var(--gold)
+    }
+
+    footer h2 {
+      font-size: 2.4rem
+    }
+
+    .who {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 14px 0 20px
+    }
+
+    .who span {
+      background: var(--gold);
+      color: #1a0a24;
+      border-radius: 99px;
+      padding: 4px 20px;
+      border: 2px solid var(--ink)
+    }
+
+    #theme {
+      position: fixed;
+      right: 14px;
+      bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+      z-index: 30;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 2px solid var(--ink);
+      background: var(--gold);
+      cursor: pointer;
+      font-size: 1.1rem
+    }
+
+    @media (prefers-reduced-motion:reduce) {
+      .lights i {
+        animation: none
+      }
+
+      html {
+        scroll-behavior: auto
+      }
+    }
+  </style>
 </head>
+
 <body>
-<nav aria-label="Sections">
-  <a href="#top">Home</a><a href="#style">Style guide</a><a href="#faq">FAQ</a><a href="#contact">Contact</a>
-</nav>
+  <nav aria-label="Sections">
+    <a href="#top">Home</a><a href="#style">Style guide</a><a href="#faq">FAQ</a><a href="#contact">Contact</a>
+  </nav>
 
-<header class="hero" id="top">
-  <div class="lights" id="lights" aria-hidden="true"></div>
-  <div class="hero-in">
-    <h1>CMI <span>Garba</span></h1>
-    <div class="chips">
-      <div class="chip"><small>When</small>24 Oct, 8–12 PM</div>
-      <div class="chip"><small>Where</small>Audi Foyer</div>
-      <div class="chip"><small>Workshop</small>6:30 PM, DS Area (23rd!)</div>
+  <header class="hero" id="top">
+    <div class="lights" id="lights" aria-hidden="true"></div>
+    <div class="hero-in">
+      <h1>CMI <span>Garba</span></h1>
+      <div class="chips">
+        <div class="chip"><small>When</small>24 Oct, 8–12 PM</div>
+        <div class="chip"><small>Where</small>Audi Foyer</div>
+        <div class="chip"><small>Workshop</small>6:30 PM, DS Area (23rd!)</div>
+      </div>
     </div>
-  </div>
-</header>
+  </header>
 
-<section id="style">
-  <h2>Style guide</h2>
-  <div class="tabs" role="tablist" aria-label="Style guide">
-    <button role="tab" id="t-g" aria-selected="true" aria-controls="p-g">Girls</button>
-    <button role="tab" id="t-b" aria-selected="false" aria-controls="p-b" tabindex="-1">Boys</button>
-  </div>
-
-  <div class="panel" id="p-g" role="tabpanel" aria-labelledby="t-g">
-    <h3 class="sub-h">What to wear to garba if you don’t have a chaniya choli</h3>
-    <div class="grid">
-      <div class="card outfit"><div class="txt"><span class="tag">Saree</span><h3>Drape it like a chaniya</h3><p>Drape the saree like a chaniya skirt, grab lots of jewellery and a dupatta (optional).</p><button class="btn peek" data-set="girls/saree">See inspo</button></div></div>
-      <div class="card outfit"><div class="txt"><span class="tag">Plain kurti</span><h3>Dupatta + jewellery</h3><p>Drape a nice dupatta (pic coming soon) and wear lots of jewellery.</p><button class="btn peek" data-set="girls/kurti">See inspo</button></div></div>
-      <div class="card outfit"><div class="txt"><span class="tag">Ethnic print shrug</span><h3>Shrug it on</h3><p>Wear a bralette or a short blouse with the shrug on top, jeans and some jewellery.</p><button class="btn peek" data-set="girls/shrug">See inspo</button></div></div>
-      <div class="card outfit"><div class="txt"><span class="tag">Skirt</span><h3>Your work is done</h3><p>You only need a top now. Take any plain top that matches and throw a dupatta on (optional). You can even pair your skirt with a kurti.</p><button class="btn peek" data-set="girls/skirt">See inspo</button></div></div>
+  <section id="style">
+    <h2>Style guide</h2>
+    <div class="tabs" role="tablist" aria-label="Style guide">
+      <button role="tab" id="t-g" aria-selected="true" aria-controls="p-g">Girls</button>
+      <button role="tab" id="t-b" aria-selected="false" aria-controls="p-b" tabindex="-1">Boys</button>
     </div>
-    <div class="inspo"><button class="btn peek" data-set="inspo/girls">More inspo</button></div>
-  </div>
 
-  <div class="panel" id="p-b" role="tabpanel" aria-labelledby="t-b" hidden>
-    <div class="rant">
-      <p style="margin:0">Guys, please don’t do the “Oh my god, I have absolutely no clothes” or “I’m not a girl, why would I get dressed up?” bullshit (let alone the blatant misogyny). You have a closet. You have a mirror. You presumably have some functioning neurons. That shall suffice.</p>
-      <p style="margin:8px 0 0;color:var(--gold)">There are 3 steps. Simple steps.</p>
-    </div>
-    <div class="steps">
-      <div class="card step"><div class="num">1</div><div>
-        <h3>Find a kurta</h3>
-        <p>Textured would be nice, but even a plain one is all good. Go for a classic, neutral colour: white, black or dark blue. No kurta at all? Time for Myntra/Ajio/Amazon: <span class="rs">₹</span>500–1,000, and nowhere above <span class="rs">₹</span>2k. Kurtas are like shirts; anyone can charge anything based on fabric and craftsmanship, but there are diminishing returns, and you’re dressing for a garba night, not an IAS interview or your wedding.</p>
-        <p>Reading this 1–2 days before (or God forbid, 1–2 hours before)? Zepto/Blinkit has decent kurtas, but don’t pay above <span class="rs">₹</span>500 there. At that point you’re paying for the privilege of being unprepared. If nothing works, grab a slightly oversized plain shirt.</p>
-        <div class="warn">DO NOT TUCK! We’re dressing for a garba, not for your placements.</div><button class="btn peek" data-set="boys/step1">See inspo</button>
-      </div></div>
-
-      <div class="card step"><div class="num">2</div><div>
-        <h3>Add a koti (or a stand-in)</h3>
-        <p>Have a festive koti? You’re done! Congratulations. So proud of you.</p>
-        <p>If not, two options. One looks better but requires you to talk to people (scary!). The other is a bit less polished, but you’ll never have to talk to anyone. Choose your fighter.</p>
-        <div class="duo">
-          <div><b>Numro Uno</b><br>Ask your mahila mitra (perhaps make one) for a nice patterned dupatta. Promise to keep it clean and offer to rinse it before returning it (they’ll probably say no to the latter). Be a man of your word, and return it. Don’t make her ask three times.</div>
-          <div><b>Numro Dos</b><br>Find the best patterned shirt in your closet and use it as an overshirt. Not over another shirt. Go to Uno for that.</div>
-        </div><button class="btn peek" data-set="boys/step2">See inspo</button>
-      </div></div>
-
-      <div class="card step"><div class="num">3</div><div>
-        <h3>Jeans and proper footwear</h3>
-        <p>Blue or black jeans. I’m a sucker for blue jeans + kurta, but you do you. They should fit reasonably well: not fighting for their lives, and not enough fabric to accommodate a second person.</p>
-        <p>Wear sandals (if you have them) or clean shoes. For the love of god, not running shoes or formals. It’s neither a marathon nor a meeting. Clean sneakers count as good dress shoes.</p>
-        <div class="warn">It’s not hard to not turn up in SHORTS OR SLIPPERS. The bar is on the floor and yet, we continue to dig.</div><button class="btn peek" data-set="boys/step3">See inspo</button>
-      </div></div>
-
-      <div class="card step noimg"><div class="num">★</div><div>
-        <h3>The final check</h3>
-        <p>Ask the opinion of a smart person (other guys don’t count; I won’t be explaining myself), perhaps the mahila mitra from Step 2. If something feels off, ask what. Iterate till perfect. If they say something doesn’t work, don’t argue. You asked for feedback, not a debate motion.</p>
-        <p>Finally, remember, this is the most effort you’ve ever put into an outfit. So dance, enjoy and click a shit ton of photos.</p>
-      </div></div>
-    </div>
-    <div class="inspo"><button class="btn peek" data-set="inspo/boys">More inspo</button></div>
-  </div>
-</section>
-
-<section id="faq">
-  <h2>FAQ</h2>
-  <div class="faq-tools">
-    <input type="search" id="q" placeholder="Search questions…" aria-label="Search FAQ">
-    <button class="btn" id="all" type="button">Open all</button>
-  </div>
-  <div id="faqList">
-    <details><summary>I don’t have something to wear</summary><div class="a"><p>Um, just look at the style guide. Also, don’t stress it. Turn up in any ethnic (or even general party) wear. It’s just a party. None of us have anything “fancy”.</p></div></details>
-    <details><summary>Will there be garba for all 4 hours?</summary><div class="a"><p>Garba from ~7:30 to 10, then we’ll slowly transition into DJ till 12.</p></div></details>
-    <details><summary>Daruuuuu!</summary><div class="a"><p>Pls don’t till 10. Then just pre-game till like 10:30–11 and then DJ…</p></div></details>
-    <details><summary>I don’t have a partner</summary><div class="a"><p>Couples do turn up to garba and do some cute stuff, but it’s not a couples dance. It’s a group dance. Sabh ko aana hai.</p><p><i>“Group dance wale hi memories banate hai. Couples toh sirf reels banate hai.”</i> – Om Chaudhari</p></div></details>
-    <details><summary>I can’t dance</summary><div class="a"><p>Turn up to the workshop at 6:30 in DS Area on the 23rd. Can’t make it at all? You can learn by copying what other peeps are doing. Garba is a folk dance, not some complicated breaking or bharatnatyam.</p></div></details>
-    <details><summary>Which way do I go? Clockwise? Anticlockwise?</summary><div class="a"><p>Follow the person in front of you. If everyone’s going the opposite way, it’s you. The workshop will fix this in ten minutes.</p></div></details>
-    <details><summary>I’m shy / I’ll feel awkward</summary><div class="a"><p>Everyone is too busy worrying about their own steps to watch yours. Join the outer circle, copy the person ahead, and smile. That’s the whole trick.</p></div></details>
-    <details><summary>Will the songs all be Bollywood?</summary><div class="a"><p>NO! Proper Gujarati garba songs, each with its own vibe. The canonical Chogada and Kamariya will be there, but no Bollywood garba fusion.</p></div></details>
-    <details><summary>I don’t know Gujarati. Will I understand anything?</summary><div class="a"><p>Um, songs are just a vibe. You don’t need to know anything about Gujarati.</p></div></details>
-    <details><summary>Can I wear western clothes?</summary><div class="a"><p>Ideally add something ethnic: a dupatta, a shrug, a kurta, jewellery. Pure western is not banned, but then it’s a bit of a missed opportunity, no?</p></div></details>
-    <details><summary>What footwear works for dancing?</summary><div class="a"><p>Comfortable, closed and clean. Sandals or sneakers are fine. Heels are a brave choice for 4 hours. Slippers and running shoes are not (see the boys’ guide).</p></div></details>
-    <details><summary>Can I just come to watch?</summary><div class="a"><p>You can, but the circle has a way of pulling people in. Fair warning.</p></div></details>
-    <details><summary>Can I bring a friend from outside?</summary><div class="a"><p>Ask Kangna, Harshitha or Arjun (see Contact below) before you plan on it.</p></div></details>
-    <details><summary>Is this a religious/Hindu event?</summary><div class="a"><p>Garba is literally a “Gujarati” thing, not a “Hindu” thing. Also, it’s a dance party. Don’t read that much into it.</p></div></details>
-    <details class="troll"><summary>I object to the Gujarat-fication of India and all things Gujarati. This hurts my sentiments and pushes a Hindutva objective in a secular institute.</summary>
-      <div class="a"><p>Ekdum. Pls send a strongly worded letter to the following:</p>
-        <div class="letter">
-          <div class="addr">
-            <address><b>PMO</b><br>Prime Minister’s Office<br>South Block, Raisina Hill<br>New Delhi – 110011</address>
-            <address><b>HMO</b><br>Home Minister’s Office<br>Ministry of Home Affairs, North Block<br>New Delhi – 110001</address>
+    <div class="panel" id="p-g" role="tabpanel" aria-labelledby="t-g">
+      <h3 class="sub-h">What to wear to garba if you don’t have a chaniya choli</h3>
+      <div class="grid">
+        <div class="card outfit">
+          <div class="txt"><span class="tag">Saree</span>
+            <h3>Drape it like a chaniya</h3>
+            <p>Drape the saree like a chaniya skirt, grab lots of jewellery and a dupatta (optional).</p><button
+              class="btn peek" data-set="girls/saree">See inspo</button>
           </div>
-          <button class="btn" id="send" type="button">Email strongly worded letter</button>
-          <div class="status" id="status" role="status" aria-live="polite"></div>
         </div>
-      </div></details>
-    <p class="none" id="none">Nothing found. Try another word, or ask the organisers.</p>
-  </div>
-</section>
+        <div class="card outfit">
+          <div class="txt"><span class="tag">Plain kurti</span>
+            <h3>Dupatta + jewellery</h3>
+            <p>Drape a nice dupatta (pic coming soon) and wear lots of jewellery.</p><button class="btn peek"
+              data-set="girls/kurti">See inspo</button>
+          </div>
+        </div>
+        <div class="card outfit">
+          <div class="txt"><span class="tag">Ethnic print shrug</span>
+            <h3>Shrug it on</h3>
+            <p>Wear a bralette or a short blouse with the shrug on top, jeans and some jewellery.</p><button
+              class="btn peek" data-set="girls/shrug">See inspo</button>
+          </div>
+        </div>
+        <div class="card outfit">
+          <div class="txt"><span class="tag">Skirt</span>
+            <h3>Your work is done</h3>
+            <p>You only need a top now. Take any plain top that matches and throw a dupatta on (optional). You can even
+              pair your skirt with a kurti.</p><button class="btn peek" data-set="girls/skirt">See inspo</button>
+          </div>
+        </div>
+      </div>
+      <div class="inspo"><button class="btn peek" data-set="inspo/girls">More inspo</button></div>
+    </div>
 
-<footer id="contact">
-  <h2>Questions?</h2>
-  <p>Still confused after all that? Ping us.</p>
-  <div class="who"><span>Kangna</span><span>Harshitha</span><span>Arjun</span></div>
-</footer>
-<button id="theme" type="button" aria-label="Toggle light or dark">◐</button>
-<dialog class="lb" id="lb" aria-label="Inspo"><div class="lb-top"><b id="lbT"></b><button class="btn" id="lbX" type="button">Close ✕</button></div><div class="lb-body" id="lbB"></div></dialog>
+    <div class="panel" id="p-b" role="tabpanel" aria-labelledby="t-b" hidden>
+      <div class="rant">
+        <p style="margin:0">Guys, please don’t do the “Oh my god, I have absolutely no clothes” or “I’m not a girl, why
+          would I get dressed up?” bullshit (let alone the blatant misogyny). You have a closet. You have a mirror. You
+          presumably have some functioning neurons. That shall suffice.</p>
+        <p style="margin:8px 0 0;color:var(--gold)">There are 3 steps. Simple steps.</p>
+      </div>
+      <div class="steps">
+        <div class="card step">
+          <div class="num">1</div>
+          <div>
+            <h3>Find a kurta</h3>
+            <p>Textured would be nice, but even a plain one is all good. Go for a classic, neutral colour: white, black
+              or dark blue. No kurta at all? Time for Myntra/Ajio/Amazon: <span class="rs">₹</span>500–1,000, and
+              nowhere above <span class="rs">₹</span>2k. Kurtas are like shirts; anyone can charge anything based on
+              fabric and craftsmanship, but there are diminishing returns, and you’re dressing for a garba night, not an
+              IAS interview or your wedding.</p>
+            <p>Reading this 1–2 days before (or God forbid, 1–2 hours before)? Zepto/Blinkit has decent kurtas, but
+              don’t pay above <span class="rs">₹</span>500 there. At that point you’re paying for the privilege of being
+              unprepared. If nothing works, grab a slightly oversized plain shirt.</p>
+            <div class="warn">DO NOT TUCK! We’re dressing for a garba, not for your placements.</div><button
+              class="btn peek" data-set="boys/step1">See inspo</button>
+          </div>
+        </div>
 
-<script>
-/* IMAGES: put numbered files in these folders (1.jpg, 2.jpg, 3.jpg … jpg/jpeg/png/webp, up to 24 each):
-   images/girls/saree  kurti  shrug  skirt      images/boys/step1  step2  step3
-   images/inspo/girls   images/inspo/boys */
-const MAX=24,EXT=['jpg','jpeg','png','webp'],cache={};
-function load(base,cb,fail){let i=0;(function next(){
-  if(i>=EXT.length){fail&&fail();return}
-  const im=new Image();im.onload=()=>cb(im);im.onerror=next;im.src=`images/${base}.${EXT[i++]}`})()}
-function fetchSet(set){return cache[set]||(cache[set]=new Promise(res=>{
-  const slots=[];let done=0;const fin=()=>{if(++done===MAX)res(slots.filter(Boolean))};
-  for(let n=1;n<=MAX;n++)load(`${set}/${n}`,im=>{slots[n]=im;fin()},fin)}))}
-const lb=document.getElementById('lb'),lbB=document.getElementById('lbB');
-document.querySelectorAll('.peek').forEach(b=>b.onclick=async()=>{
-  const c=b.closest('.card');
-  document.getElementById('lbT').textContent=c?c.querySelector('h3').textContent:'More inspo';
-  lbB.innerHTML='<p>Loading…</p>';lb.showModal();lbB.scrollTop=0;
-  const ims=await fetchSet(b.dataset.set);lbB.innerHTML='';
-  if(!ims.length){lbB.innerHTML='<p>Inspo pics coming soon.</p>';return}
-  ims.forEach(im=>{const x=im.cloneNode();x.alt='Outfit inspiration';lbB.appendChild(x)})});
-document.getElementById('lbX').onclick=()=>lb.close();
-lb.onclick=e=>{if(e.target===lb)lb.close()};
+        <div class="card step">
+          <div class="num">2</div>
+          <div>
+            <h3>Add a koti (or a stand-in)</h3>
+            <p>Have a festive koti? You’re done! Congratulations. So proud of you.</p>
+            <p>If not, two options. One looks better but requires you to talk to people (scary!). The other is a bit
+              less polished, but you’ll never have to talk to anyone. Choose your fighter.</p>
+            <div class="duo">
+              <div><b>Numro Uno</b><br>Ask your mahila mitra (perhaps make one) for a nice patterned dupatta. Promise to
+                keep it clean and offer to rinse it before returning it (they’ll probably say no to the latter). Be a
+                man of your word, and return it. Don’t make her ask three times.</div>
+              <div><b>Numro Dos</b><br>Find the best patterned shirt in your closet and use it as an overshirt. Not over
+                another shirt. Go to Uno for that.</div>
+            </div><button class="btn peek" data-set="boys/step2">See inspo</button>
+          </div>
+        </div>
 
-// string lights
-(function(){let h='';
-  for(let r=0;r<6;r++){const y=8+r*13,n=14;
-    for(let i=0;i<n;i++){const x=(i+.5)/n*100,sag=Math.sin(i/(n-1)*Math.PI)*5;
-      h+=`<i style="left:${x}%;top:${y+sag}%;animation-delay:${((r*n+i)*.37%2.6).toFixed(2)}s"></i>`}}
-  document.getElementById('lights').innerHTML=h})();
+        <div class="card step">
+          <div class="num">3</div>
+          <div>
+            <h3>Jeans and proper footwear</h3>
+            <p>Blue or black jeans. I’m a sucker for blue jeans + kurta, but you do you. They should fit reasonably
+              well: not fighting for their lives, and not enough fabric to accommodate a second person.</p>
+            <p>Wear sandals (if you have them) or clean shoes. For the love of god, not running shoes or formals. It’s
+              neither a marathon nor a meeting. Clean sneakers count as good dress shoes.</p>
+            <div class="warn">It’s not hard to not turn up in SHORTS OR SLIPPERS. The bar is on the floor and yet, we
+              continue to dig.</div><button class="btn peek" data-set="boys/step3">See inspo</button>
+          </div>
+        </div>
 
-// tabs
-const tabs=[...document.querySelectorAll('[role=tab]')];
-function pick(t){tabs.forEach(b=>{const on=b===t;b.setAttribute('aria-selected',on);b.tabIndex=on?0:-1;
-  document.getElementById(b.getAttribute('aria-controls')).hidden=!on})}
-tabs.forEach((b,i)=>{b.onclick=()=>pick(b);
-  b.onkeydown=e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){const n=tabs[(i+1)%tabs.length];pick(n);n.focus()}}});
+        <div class="card step noimg">
+          <div class="num">★</div>
+          <div>
+            <h3>The final check</h3>
+            <p>Ask the opinion of a smart person (other guys don’t count; I won’t be explaining myself), perhaps the
+              mahila mitra from Step 2. If something feels off, ask what. Iterate till perfect. If they say something
+              doesn’t work, don’t argue. You asked for feedback, not a debate motion.</p>
+            <p>Finally, remember, this is the most effort you’ve ever put into an outfit. So dance, enjoy and click a
+              shit ton of photos.</p>
+          </div>
+        </div>
+      </div>
+      <div class="inspo"><button class="btn peek" data-set="inspo/boys">More inspo</button></div>
+    </div>
+  </section>
 
-// faq
-const items=[...document.querySelectorAll('#faqList details')];
-document.getElementById('q').oninput=e=>{const v=e.target.value.toLowerCase().trim();let n=0;
-  items.forEach(d=>{const m=!v||d.textContent.toLowerCase().includes(v);d.style.display=m?'':'none';if(m)n++;if(v&&m)d.open=true});
-  document.getElementById('none').style.display=n?'none':'block'};
-let opened=false;
-document.getElementById('all').onclick=function(){opened=!opened;items.forEach(d=>d.open=opened);this.textContent=opened?'Close all':'Open all'};
+  <section id="faq">
+    <h2>FAQ</h2>
+    <div class="faq-tools">
+      <input type="search" id="q" placeholder="Search questions…" aria-label="Search FAQ">
+      <button class="btn" id="all" type="button">Open all</button>
+    </div>
+    <div id="faqList">
+      <details>
+        <summary>I don’t have something to wear</summary>
+        <div class="a">
+          <p>Um, just look at the style guide. Also, don’t stress it. Turn up in any ethnic (or even general party)
+            wear. It’s just a party. None of us have anything “fancy”.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Will there be garba for all 4 hours?</summary>
+        <div class="a">
+          <p>Garba from ~7:30 to 10, then we’ll slowly transition into DJ till 12.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Daruuuuu!</summary>
+        <div class="a">
+          <p>Pls don’t till 10. Then just pre-game till like 10:30–11 and then DJ…</p>
+        </div>
+      </details>
+      <details>
+        <summary>I don’t have a partner</summary>
+        <div class="a">
+          <p>Couples do turn up to garba and do some cute stuff, but it’s not a couples dance. It’s a group dance. Sabh
+            ko aana hai.</p>
+          <p><i>“Group dance wale hi memories banate hai. Couples toh sirf reels banate hai.”</i> – Om Chaudhari</p>
+        </div>
+      </details>
+      <details>
+        <summary>I can’t dance</summary>
+        <div class="a">
+          <p>Turn up to the workshop at 6:30 in DS Area on the 23rd. Can’t make it at all? You can learn by copying what
+            other peeps are doing. Garba is a folk dance, not some complicated breaking or bharatnatyam.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Which way do I go? Clockwise? Anticlockwise?</summary>
+        <div class="a">
+          <p>Follow the person in front of you. If everyone’s going the opposite way, it’s you. The workshop will fix
+            this in ten minutes.</p>
+        </div>
+      </details>
+      <details>
+        <summary>I’m shy / I’ll feel awkward</summary>
+        <div class="a">
+          <p>Everyone is too busy worrying about their own steps to watch yours. Join the outer circle, copy the person
+            ahead, and smile. That’s the whole trick.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Will the songs all be Bollywood?</summary>
+        <div class="a">
+          <p>NO! Proper Gujarati garba songs, each with its own vibe. The canonical Chogada and Kamariya will be there,
+            but no Bollywood garba fusion.</p>
+        </div>
+      </details>
+      <details>
+        <summary>I don’t know Gujarati. Will I understand anything?</summary>
+        <div class="a">
+          <p>Um, songs are just a vibe. You don’t need to know anything about Gujarati.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Can I wear western clothes?</summary>
+        <div class="a">
+          <p>Ideally add something ethnic: a dupatta, a shrug, a kurta, jewellery. Pure western is not banned, but then
+            it’s a bit of a missed opportunity, no?</p>
+        </div>
+      </details>
+      <details>
+        <summary>What footwear works for dancing?</summary>
+        <div class="a">
+          <p>Comfortable, closed and clean. Sandals or sneakers are fine. Heels are a brave choice for 4 hours. Slippers
+            and running shoes are not (see the boys’ guide).</p>
+        </div>
+      </details>
+      <details>
+        <summary>Can I just come to watch?</summary>
+        <div class="a">
+          <p>You can, but the circle has a way of pulling people in. Fair warning.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Can I bring a friend from outside?</summary>
+        <div class="a">
+          <p>Ask Kangna, Harshitha or Arjun (see Contact below) before you plan on it.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Is this a religious/Hindu event?</summary>
+        <div class="a">
+          <p>Garba is literally a “Gujarati” thing, not a “Hindu” thing. Also, it’s a dance party. Don’t read that much
+            into it.</p>
+        </div>
+      </details>
+      <details class="troll">
+        <summary>I object to the Gujarat-fication of India and all things Gujarati. This hurts my sentiments and pushes
+          a Hindutva objective in a secular institute.</summary>
+        <div class="a">
+          <p>Ekdum. Pls send a strongly worded letter to the following:</p>
+          <div class="letter">
+            <div class="addr">
+              <address><b>PMO</b><br>Prime Minister’s Office<br>South Block, Raisina Hill<br>New Delhi – 110011
+              </address>
+              <address><b>HMO</b><br>Home Minister’s Office<br>Ministry of Home Affairs, North Block<br>New Delhi –
+                110001</address>
+            </div>
+            <button class="btn" id="send" type="button">Email strongly worded letter</button>
+            <div class="status" id="status" role="status" aria-live="polite"></div>
+          </div>
+        </div>
+      </details>
+      <p class="none" id="none">Nothing found. Try another word, or ask the organisers.</p>
+    </div>
+  </section>
 
-// troll letter
-document.getElementById('send').onclick=function(){
-  const msgs=['Dispatching to PMO…','Dispatching to HMO…','Letter delivered to the recycle bin. 🎉'];let i=0;
-  const st=document.getElementById('status');this.disabled=true;st.textContent=msgs[0];
-  const t=setInterval(()=>{st.textContent=msgs[++i];if(i===msgs.length-1){clearInterval(t);this.disabled=false}},900)};
+  <footer id="contact">
+    <h2>Questions?</h2>
+    <p>Still confused after all that? Ping us.</p>
+    <div class="who"><span>Kangna</span><span>Harshitha</span><span>Arjun</span></div>
+  </footer>
+  <button id="theme" type="button" aria-label="Toggle light or dark">◐</button>
+  <dialog class="lb" id="lb" aria-label="Inspo">
+    <div class="lb-top"><b id="lbT"></b><button class="btn" id="lbX" type="button">Close ✕</button></div>
+    <div class="lb-body" id="lbB"></div>
+  </dialog>
 
-// theme
-try{const t=localStorage.getItem('garba-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}
-document.getElementById('theme').onclick=()=>{
-  const d=document.documentElement,dark=d.dataset.theme?d.dataset.theme==='dark':matchMedia('(prefers-color-scheme:dark)').matches;
-  d.dataset.theme=dark?'light':'dark';try{localStorage.setItem('garba-theme',d.dataset.theme)}catch(e){}};
-</script>
+  <script>
+    /* IMAGES: put numbered files in these folders (1.jpg, 2.jpg, 3.jpg … jpg/jpeg/png/webp, up to 24 each):
+       images/girls/saree  kurti  shrug  skirt      images/boys/step1  step2  step3
+       images/inspo/girls   images/inspo/boys */
+    const MAX = 24, EXT = ['jpg', 'jpeg', 'png', 'webp'], cache = {};
+    function load(base, cb, fail) {
+      let i = 0; (function next() {
+        if (i >= EXT.length) { fail && fail(); return }
+        const im = new Image(); im.onload = () => cb(im); im.onerror = next; im.src = `images/${base}.${EXT[i++]}`
+      })()
+    }
+    function fetchSet(set) {
+      return cache[set] || (cache[set] = new Promise(res => {
+        const slots = []; let done = 0; const fin = () => { if (++done === MAX) res(slots.filter(Boolean)) };
+        for (let n = 1; n <= MAX; n++)load(`${set}/${n}`, im => { slots[n] = im; fin() }, fin)
+      }))
+    }
+    const lb = document.getElementById('lb'), lbB = document.getElementById('lbB');
+    document.querySelectorAll('.peek').forEach(b => b.onclick = async () => {
+      const c = b.closest('.card');
+      document.getElementById('lbT').textContent = c ? c.querySelector('h3').textContent : 'More inspo';
+      lbB.innerHTML = '<p>Loading…</p>'; lb.showModal(); lbB.scrollTop = 0;
+      const ims = await fetchSet(b.dataset.set); lbB.innerHTML = '';
+      if (!ims.length) { lbB.innerHTML = '<p>Inspo pics coming soon.</p>'; return }
+      ims.forEach(im => { const x = im.cloneNode(); x.alt = 'Outfit inspiration'; lbB.appendChild(x) })
+    });
+    document.getElementById('lbX').onclick = () => lb.close();
+    lb.onclick = e => { if (e.target === lb) lb.close() };
+
+    // string lights
+    (function () {
+      let h = '';
+      for (let r = 0; r < 6; r++) {
+        const y = 8 + r * 13, n = 14;
+        for (let i = 0; i < n; i++) {
+          const x = (i + .5) / n * 100, sag = Math.sin(i / (n - 1) * Math.PI) * 5;
+          h += `<i style="left:${x}%;top:${y + sag}%;animation-delay:${((r * n + i) * .37 % 2.6).toFixed(2)}s"></i>`
+        }
+      }
+      document.getElementById('lights').innerHTML = h
+    })();
+
+    // tabs
+    const tabs = [...document.querySelectorAll('[role=tab]')];
+    function pick(t) {
+      tabs.forEach(b => {
+        const on = b === t; b.setAttribute('aria-selected', on); b.tabIndex = on ? 0 : -1;
+        document.getElementById(b.getAttribute('aria-controls')).hidden = !on
+      })
+    }
+    tabs.forEach((b, i) => {
+      b.onclick = () => pick(b);
+      b.onkeydown = e => { if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { const n = tabs[(i + 1) % tabs.length]; pick(n); n.focus() } }
+    });
+
+    // faq
+    const items = [...document.querySelectorAll('#faqList details')];
+    document.getElementById('q').oninput = e => {
+      const v = e.target.value.toLowerCase().trim(); let n = 0;
+      items.forEach(d => { const m = !v || d.textContent.toLowerCase().includes(v); d.style.display = m ? '' : 'none'; if (m) n++; if (v && m) d.open = true });
+      document.getElementById('none').style.display = n ? 'none' : 'block'
+    };
+    let opened = false;
+    document.getElementById('all').onclick = function () { opened = !opened; items.forEach(d => d.open = opened); this.textContent = opened ? 'Close all' : 'Open all' };
+
+    // troll letter
+    document.getElementById('send').onclick = function () {
+      const msgs = ['Dispatching to PMO…', 'Dispatching to HMO…', 'Letter delivered to the recycle bin. 🎉']; let i = 0;
+      const st = document.getElementById('status'); this.disabled = true; st.textContent = msgs[0];
+      const t = setInterval(() => { st.textContent = msgs[++i]; if (i === msgs.length - 1) { clearInterval(t); this.disabled = false } }, 900)
+    };
+
+    // theme
+    try { const t = localStorage.getItem('garba-theme'); if (t) document.documentElement.dataset.theme = t } catch (e) { }
+    document.getElementById('theme').onclick = () => {
+      const d = document.documentElement, dark = d.dataset.theme ? d.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme:dark)').matches;
+      d.dataset.theme = dark ? 'light' : 'dark'; try { localStorage.setItem('garba-theme', d.dataset.theme) } catch (e) { }
+    };
+  </script>
 </body>
+
 </html>
